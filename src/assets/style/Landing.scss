@@ -1,0 +1,29 @@
+$green: #7ceaa4;
+$purple: #3b3d54;
+
+
+.svg{
+	position:absolute;
+	bottom: -100vh;
+	transform-style: preserve-3d;
+}
+
+$total: 10;
+@for $i from 1 through $total {
+	$scale:random(2) - .4;
+	
+	.svg:nth-child(#{$i}){
+		left:random(100) * 1%;
+		animation: raise#{$i} 6 + random(15) +s linear infinite;
+		animation-delay:random(5) - 5 + s;
+		transform: scale(random(4) + 2) rotate(random(360) + deg);
+		z-index: 10;
+
+	  @keyframes raise#{$i} {
+		  to{
+			 bottom:150vh;
+			 transform: scale(1 * $i - 5) rotate(random(360) + deg);
+			}
+		}
+	}
+}

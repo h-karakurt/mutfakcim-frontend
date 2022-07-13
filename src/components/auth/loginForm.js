@@ -1,0 +1,318 @@
+import styled from "styled-components";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import "../../assets/style/custom-styles.scss";
+import React, { useRef, useState } from "react";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import Logo from "../../assets/images/Logo.svg";
+
+var axios = require("axios");
+
+const CenteredDiv = styled.div`
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+
+  background: #76b852;
+  box-shadow: 0px 10px 10px 5px #62727d;
+  border-radius: 1px;
+  position: absolute;
+  width: 50%;
+  top: 25%;
+  left: 25%;
+  button {
+    font-weight: bold;
+  }
+  label {
+    color: white;
+  }
+  .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    input:-webkit-autofill {
+      background-color: red;
+    }
+  }
+
+  .right-panel {
+    background-color: #fcffe7;
+    padding: 15px;
+  }
+  .left-panel {
+    padding: 3em;
+  }
+  @media screen and (max-width: 1400px) {
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    .left-panel {
+      padding: 2em;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    width: 70%;
+    top: 15%;
+    left: 15%;
+  }
+  @media screen and (max-width: 992px) {
+    width: 60%;
+    top: 20%;
+    left: 20%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    top: 10%;
+    left: 10%;
+  }
+  @media screen and (max-width: 576px) {
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    .right-panel {
+      background-color: #fcffe7;
+      padding: 15px;
+    }
+    .left-panel {
+      padding-top: 1em;
+      padding-bottom: 5px;
+    }
+  }
+`;
+
+const Header = styled.h1`
+  color: black;
+  font-weight: bold;
+`;
+
+const Text = styled.p`
+  color: black;
+  font-weight: bold;
+  font-size: 1.2em;
+`;
+
+const Span = styled.span`
+  color: white;
+`;
+
+const SpinnerWrapper = styled.div`
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  z-index: 99999;
+  background-color: #00000077;
+  height: 100%;
+
+  #loading {
+    display: inline-block;
+    width: 60px;
+    margin-top: 25%;
+    height: 60px;
+    border: 5px solid #76b852;
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+`;
+
+const myStyle = {
+  color: "whitesmoke",
+};
+
+export default function Login(props) {
+  //post using refs
+  const emailInput = useRef(null);
+  const passInput = useRef(null);
+
+  //isLoading
+  const [loading, setLoading] = useState(false);
+
+  //isChecked & setLocalstorageAuth
+  const [isChecked, setChecked] = useState(false);
+
+  const Spinner = () => {
+    if (loading === true) {
+      return (
+        <SpinnerWrapper>
+          <h1>{loading}</h1>
+          <div id="loading"></div>
+        </SpinnerWrapper>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  function HandlePost(event) {
+    event.preventDefault();
+    setLoading(true);
+
+    var form = JSON.stringify({
+      email: emailInput?.current?.value,
+      password: passInput?.current?.value,
+    });
+
+    axios({
+      method: "POST",
+      url: "http://localhost:3051/api/users/login",
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: form,
+    })
+      .then(function (response) {
+        setLoading(false);
+        
+        if(isChecked){
+          localStorage.setItem("email" , emailInput?.current?.value)
+        }
+        
+        Swal.fire({
+          title: "Başarılı!",
+          text: "Hemen sizi ana sayfaya yönlendiriyoruz",
+          icon: "success",
+          confirmButtonText: "Gidelim.",
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(function () {
+          window.location.href = "/shop";
+        });
+      })
+      .catch(function (error) {
+        setLoading(false);
+
+        if (error.response.status === 403) {
+          Swal.fire({
+            title: "Tüh...",
+            text: "E posta adresiniz hatalı",
+            icon: "error",
+            confirmButtonText: "Tekrar Deneyelim..",
+          });
+        } else if (error.response.status === 418) {
+          Swal.fire({
+            title: "Tüh...",
+            text: "Hatalı Parola",
+            icon: "error",
+            confirmButtonText: "Tekrar Deneyelim..",
+          });
+        }
+      });
+  }
+
+  return (
+    <CenteredDiv className="text-center">
+      <Spinner />
+      <Row className="g-0">
+        <Col
+          xl={{ order: "first", span: "6" }}
+          lg={{ order: "first", span: "6" }}
+          md={{ order: "last", span: "12" }}
+          sm={{ order: "last", span: "12" }}
+          xs={{ order: "last", span: "12" }}
+          className="left-panel"
+        >
+          <Form>
+            <Row>
+              <Form.Group className="mb-3">
+                <Form.Label className="text-light float-start">
+                  E-Posta Adresi
+                </Form.Label>
+                <Form.Control
+                  ref={emailInput}
+                  type="text"
+                  placeholder="E-posta"
+                  defaultValue={localStorage.getItem("email")}
+                />
+              </Form.Group>
+            </Row>
+
+            <Row>
+              <Form.Group className="mb-3">
+                <Form.Label className="text-light float-start">
+                  Şifre
+                </Form.Label>
+                <Form.Control
+                  ref={passInput}
+                  type="password"
+                  placeholder="***"
+                />
+              </Form.Group>
+            </Row>
+
+            <Row>
+              <Form.Group
+                className="text-light w-50"
+                controlId="formBasicCheckbox"
+              >
+                <Form.Check
+                  type="checkbox"
+                  label="Beni Hatırla"
+                  checked={isChecked || localStorage.getItem("email")}
+                  onChange={(e) => setChecked(!isChecked)}
+                />
+              </Form.Group>
+            </Row>
+
+            <Row>
+              <Button
+                className="mt-3 w-75 m-auto"
+                variant="secondary"
+                onClick={HandlePost}
+                type="submit"
+              >
+                Giriş Yap
+              </Button>
+            </Row>
+
+            <Row>
+              <Link style={myStyle} className="mt-3" to="/auth/forgetpassword">
+                Şifremi Unuttum.
+              </Link>
+            </Row>
+            <Row>
+              <Span className="mt-3">
+                Hesabınız yok mu?{" "}
+                <Link style={myStyle} className="mt-3" to="/auth/register">
+                  Hesap Oluşturun
+                </Link>
+              </Span>
+            </Row>
+          </Form>
+        </Col>
+
+        <Col
+          xl={{ order: "last", span: "6" }}
+          lg={{ order: "last", span: "6" }}
+          md={{ order: "first", span: "12" }}
+          sm={{ order: "first", span: "12" }}
+          xs={{ order: "first", span: "12" }}
+          className="right-panel"
+        >
+          <div className="mt-3 mt-lg-5">
+            <img src={Logo} alt="Logo" />
+            <Header>Hoşgeldiniz.</Header>
+            <Text className="mt-5">Sizi tekrar burada görmek çok güzel!</Text>
+          </div>
+        </Col>
+      </Row>
+    </CenteredDiv>
+  );
+}
