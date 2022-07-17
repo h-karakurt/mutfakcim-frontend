@@ -1,3 +1,17 @@
 body{
     overflow-x: hidden;
 }
+
+.form-check-input:checked {
+    background-color: #FCFFE7  !important;
+    border-color: #76B852 !important;
+}
+
+.form-check-input:focus {
+    border-color: unset !important;
+    box-shadow: unset !important;
+}
+
+.form-check-input:checked[type=checkbox] {
+    background-image: url(data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27%3e%3cpath fill=%27none%27 stroke=%27%23000%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27M6 10l3 3l6-6%27/%3e%3c/svg%3e) !important;
+}

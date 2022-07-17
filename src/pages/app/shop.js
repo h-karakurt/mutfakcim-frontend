@@ -214,6 +214,16 @@ export default function Dashboard() {
     }
   }
 
+  //setting usestate data rows
+  const [row, setRow] = useState([]);
+
+  //disable saveShop on empty rows
+  const [saveDisabled , setSaveDisabled] = useState(true);
+
+  /*DATA STATES*/
+  const [savedShop, setSavedShop] = useState();
+  const [historyOptions , setHistoryOptions] = useState();
+
   const [loading , setLoading] = useState(true)
 
   //modal Show
@@ -248,54 +258,98 @@ export default function Dashboard() {
     })
   });
 
-  //load shops on page load
+  //initialize shops on page load
   useEffect(() => {
-    FetchShop();
+    initializeShop()
   },[])
 
-  const FetchShop = () => {
+  const initializeShop = async() => {
     setLoading(true);
-    axios({
+    
+    await axios({
       method: "GET",
       url: "http://localhost:3051/api/shops/getShops",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
       },
-    })
-    .then((response) => {
-      console.log(response.data);
+    }).then((res) => {
       
-      const GetShopMapper = () => {
-        const shopTableData = response.data.map((item , index) => 
-          <Card className="shop cream-bg">
-            <Card.Header>
-              <h3>{item.totalPrice}₺</h3> <span className="me-5">{formatDate(item.date)}</span>
-            </Card.Header>
-            <Card.Body>
-            <ul key={index}>
-            {item.product.map((subitem , subindex) => 
-              <li key={subindex}>{subitem.productName} {subitem.unitPrice}₺ {subitem.quantity}{subitem.unit} {subitem.category}</li>
-            )}
-            </ul>
-            <span type="submit" onClick={() => {DeleteShop(item._id)}}>❌</span>
-            </Card.Body>
-          </Card>
-        );
+      setLoading(false)
+      
+      /*ADD PRODUCT MODAL*/
+      setSavedShop(shopMapper(res.data));
     
-        return (
-          <>
-            {shopTableData}
-          </>
-        );
-      }
-      setSavedShop(GetShopMapper);
-    }).then(() => {setLoading(false)})
-    .catch(function (error) {});
+      /*HISTORY ADD MODAL*/
+      setHistoryOptions(hisoryOptionMapper(res.data))
+      
+
+    }).catch(function (error) {
+      
+      setLoading(false)
+      Swal.fire({
+        title: "Hata",
+        text: "Alışverişlerine ulaşamadık",
+        icon: "error",
+        confirmButtonText: "Tamam.",
+      }).then(() => {
+        //window.location.reload();
+      })
+
+    });
+    
+  }
+
+  const shopMapper = (response) => {
+    const shopTableData = response.map((item , index) => 
+      <Card className="shop cream-bg">
+        <Card.Header>
+          <h3>{item.totalPrice}₺</h3> <span className="me-5">{formatDate(item.date)}</span>
+        </Card.Header>
+        <Card.Body>
+        <ul key={index}>
+        {item.product.map((subitem , subindex) => 
+          <li key={subindex}>{subitem.productName} {subitem.unitPrice}₺ {subitem.quantity}{subitem.unit} {subitem.category}</li>
+        )}
+        </ul>
+        <span type="submit" onClick={() => {DeleteShop(item._id)}}>❌</span>
+        </Card.Body>
+      </Card>
+    );
+
+    return (
+      <>
+        {shopTableData}
+      </>
+    );
+  }
+
+  
+  const hisoryOptionMapper = (response) => {
+      
+    const OptionData = response.map((item , index) => (
+      
+      <>
+      
+      {item.product.map((subitem , subindex) =>   
+
+        <option value={subitem.productName}>
+          {subitem.productName} - {subitem.unitPrice}₺ - {subitem.quantity}{subitem.unit}
+        </option>
+        
+      )}
+      </>
+    ));
+  
+    return (
+        <>
+          <option value={"empty"}>Please select</option>
+          {OptionData}
+        </>
+    );
   }
 
   //Post Axios Alışverişi Kaydet
-  const [savedShop, setSavedShop] = useState();
 
   function SaveShop() {
     setLoading(true)
@@ -314,17 +368,11 @@ export default function Dashboard() {
         icon: "success",
         confirmButtonText: "Tamam.",
       }).then(()=>{
-        FetchShop(); 
+        initializeShop();
       })
       }).then(function () {setLoading(false); setRow([])})
       .catch(function () {setLoading(false)});
   }
-
-  //setting usestate data rows
-  const [row, setRow] = useState([]);
-
-  //disable saveShop on empty rows
-  const [saveDisabled , setSaveDisabled] = useState(true);
 
   //=========================================================================================================
 
@@ -375,13 +423,6 @@ export default function Dashboard() {
 
       setAddFormData(newFormData);
       
-      /* console.log(
-        newFormData["productName"] + 
-        newFormData["productPrice"] +
-        newFormData["productUnit"] +
-        newFormData["productCat"]
-      ); */
-      
     };
 
     const handleAddFormSubmit = (event) => {
@@ -419,14 +460,6 @@ export default function Dashboard() {
         });
       }
     };
-
-    //repoening modal
-    /* useEffect(() => {
-      if (row.length !== 0) {
-        setShow(true);
-      }
-      console.log("enter use effect");
-    }, [row]); */
 
     return (
       <>
@@ -542,43 +575,85 @@ export default function Dashboard() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    //handle inputs
-    const handleAddFormSubmit = () => {
+    //handle selected option
+    const [selectedInput , setSelectedInput] = useState("empty");
 
-    }
+    //all details of selected option
+    const [selectedOptionDetails , setSelectedOptionDetails] = useState();
 
-    //handle select options
-    const [options , setOptions] = useState();
-
-    const OptionMapper = (response) => {
-      const OptionData = response.data.map((item , index) => (
-        <>
-        {item.product.map((subitem , subindex) => 
-          <option key={subindex}>{subitem.productName} {subitem.unitPrice}₺ {subitem.quantity} {subitem.unit} {subitem.category}</option>
-        )}
-        </>
-      ));
-  
-      return (
-        {OptionData}
-      );
-    }
-
-    /* useEffect(() =>{
+    useEffect(() => {
       axios({
-        method: 'GET',
-        url: 'http://localhost:3051/api/shops/getShops',
+        method: "GET",
+        url: "http://localhost:3051/api/shops/getShops",
         withCredentials: true,
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }).then((response) => {
+      }).then((res) => {
         
-        setOptions(OptionMapper(response))
+        //filter
+        for (let i = 0; i < res.data.length; i++) {
+          res.data[i].product.reduce(function(filtered, option) {
+          
+            if (option.productName === selectedInput) {
+              
+              var someNewValue = {
+                productName: option.productName,
+                productPrice: option.unitPrice,
+                productUnit: option.quantity,
+                productUnitType: option.unit,
+                productCat: option.category,
+              }
+
+              console.log(someNewValue);
+              setSelectedOptionDetails(someNewValue)
+            }
+            
+            return filtered;
+          },[]);
+          
+        }
+
+        setLoading(false)
+  
+      }).catch(function (error) {
+        
+        setLoading(false);
+        console.log(error);
+        Swal.fire({
+          title: "Hata",
+          text: "Alışverişlerine ulaşamadık",
+          icon: "error",
+          confirmButtonText: "Tamam.",
+        }).then(() => {
+          
+          window.location.reload();
+
+        })
+      });
+    },[selectedInput])
+
+    const handleAddFormSubmit = (event) => {
+      event.preventDefault();
       
-      }).catch((err) => {})
-    },[show]); */
+      console.log(selectedOptionDetails);
+
+      const newRows = [...row, selectedOptionDetails];
+      setRow(newRows);
+
+      console.log(newRows);
+
+      Swal.fire({
+        title: "Başarılı!",
+        text: "Ürün Eklendi",
+        icon: "success",
+        confirmButtonText: "Tamamdır.",
+        timer: 700,
+        timerProgressBar: true,
+      }).then(function () {setSaveDisabled(false)});
+    } 
     
+
     return (
       <>
         <Button className="modal-button" onClick={handleShow}>
@@ -596,8 +671,8 @@ export default function Dashboard() {
               <Row>
                 <Col lg="12">
                   <Form.Label>Geçmiş Ürünler</Form.Label>
-                  <Form.Select>
-                    {options}
+                  <Form.Select value={selectedInput} onChange={e => setSelectedInput(e.target.value)}>                     
+                    {historyOptions}
                   </Form.Select>
                 </Col>
               </Row>

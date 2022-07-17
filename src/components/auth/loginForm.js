@@ -145,7 +145,7 @@ export default function Login(props) {
   const [loading, setLoading] = useState(false);
 
   //isChecked & setLocalstorageAuth
-  const [isChecked, setChecked] = useState(false);
+  const [isChecked, setChecked] = useState(localStorage.getItem("email"));
 
   const Spinner = () => {
     if (loading === true) {
@@ -159,6 +159,14 @@ export default function Login(props) {
       return null;
     }
   };
+
+  const setAndRedirect = async() => {
+    if(isChecked){
+    await localStorage.setItem("email" , emailInput?.current?.value)
+    }
+    setLoading(false);
+    window.location.href = "/shop";
+  }
 
   function HandlePost(event) {
     event.preventDefault();
@@ -178,43 +186,22 @@ export default function Login(props) {
       },
       data: form,
     })
-      .then(function (response) {
-        setLoading(false);
-        
-        if(isChecked){
-          localStorage.setItem("email" , emailInput?.current?.value)
-        }
-        
-        Swal.fire({
-          title: "Başarılı!",
-          text: "Hemen sizi ana sayfaya yönlendiriyoruz",
-          icon: "success",
-          confirmButtonText: "Gidelim.",
-          timer: 2000,
-          timerProgressBar: true,
-        }).then(function () {
-          window.location.href = "/shop";
-        });
-      })
-      .catch(function (error) {
-        setLoading(false);
-
-        if (error.response.status === 403) {
-          Swal.fire({
-            title: "Tüh...",
-            text: "E posta adresiniz hatalı",
-            icon: "error",
-            confirmButtonText: "Tekrar Deneyelim..",
-          });
-        } else if (error.response.status === 418) {
-          Swal.fire({
-            title: "Tüh...",
-            text: "Hatalı Parola",
-            icon: "error",
-            confirmButtonText: "Tekrar Deneyelim..",
-          });
-        }
+    .then(function (response) {
+      
+      setAndRedirect();
+      
+    })
+    .catch(function (error) {
+      setLoading(false);
+      
+      Swal.fire({
+        title: "Tüh...",
+        text: "Bir şeyler yanlış",
+        icon: "error",
+        confirmButtonText: "Tekrar Deneyelim..",
       });
+      
+    });
   }
 
   return (
@@ -265,7 +252,7 @@ export default function Login(props) {
                 <Form.Check
                   type="checkbox"
                   label="Beni Hatırla"
-                  checked={isChecked || localStorage.getItem("email")}
+                  checked={isChecked}
                   onChange={(e) => setChecked(!isChecked)}
                 />
               </Form.Group>

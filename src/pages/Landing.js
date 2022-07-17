@@ -9,7 +9,6 @@ var axios = require("axios");
 
 const green = '#76B852';
 
-
 const Background = styled.div`
     background-color: #FCFFE7;
     width: 100vw;
@@ -27,7 +26,7 @@ const Navbar = styled.nav`
         padding: 10px 50px;
         
         .right{
-            width: 50%;
+            width: 40%;
             @media screen and (max-width: 992px) {
                 width: 70%;
             }
@@ -207,23 +206,6 @@ const LoginButtonHandler = () => {
 } 
 
 export default function Landing() {
-
-    console.log("request storage access");
-    if (typeof document.hasStorageAccess === 'function'
-    && typeof document.requestStorageAccess === 'function') {
-
-    // safe to use Storage Access API
-    var promise = document.hasStorageAccess();
-    promise.then(
-        function (hasAccess) {
-            // Boolean hasAccess says whether the document has access or not.
-        },
-        function (reason) {
-            // Promise was rejected for some reason.
-        }
-    );
-    }
-    console.log("request storage access");
 
     document.body.style.overflow = "hidden"
     
