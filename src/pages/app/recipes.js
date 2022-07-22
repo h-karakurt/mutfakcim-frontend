@@ -14,11 +14,12 @@ const Wrapper = styled.div`
         margin: auto;
         display: flex;
         justify-content: space-between;
+        flex-direction: column
     }
 `
 
 const StyledCard = styled(Card)`
-    width: 49%;
+    width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     background-color: #FCFFE7;
@@ -29,6 +30,10 @@ const StyledCard = styled(Card)`
     
     ul{
         list-style-type: none;
+    }
+
+    .vertical-line{
+        border-right: 1px solid black;
     }
 
     @media screen and (max-width: 768px) {
@@ -45,38 +50,34 @@ export default function Recipes() {
     const MapRecipes = (response) => {
         
         const mappedData = response.data.map((item , index) => (
-            <StyledCard key={index}>
-                <h2>{item.recipeName}</h2>
-                
+            <StyledCard key={index}>                
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="1">
-                        <Accordion.Header>Tarif İçeriği</Accordion.Header>
+                        <Accordion.Header>{item.recipeName}</Accordion.Header>
                         <Accordion.Body>
-                        <ul>
-                            {item.ingredients.map((subitem , subindex) => 
-                            <li key={subindex}>{subitem.quantity} {subitem.ingredient_name}</li>
-                            )}
-                        </ul>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-                <hr></hr>
-                <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="1">
-                        <Accordion.Header>Tarif Açıklaması</Accordion.Header>
-                        <Accordion.Body>
+                        <Row>
+                            <Col sm="4" className="vertical-line">
+                                <ul>
+                                {item.ingredients.map((subitem , subindex) => 
+                                <li key={subindex}>{subitem.quantity} {subitem.ingredient_name}</li>
+                                )}
+                                </ul>
+                            </Col>
+                            <Col sm="8">
                             {item.description}
+                            </Col>
+                        </Row>
+                        
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
-
             </StyledCard>
         ));  
     
         return (
-            <Row className="g-0 card-wrapper">
+            <div className="card-wrapper">
                 {mappedData}
-            </Row>
+            </div>
         );
     }
 

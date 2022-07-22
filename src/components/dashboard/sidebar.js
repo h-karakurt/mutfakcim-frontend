@@ -138,10 +138,10 @@ export default function Sidebar(props){
                 <img className='logo' src={Logo} alt="Logo" />
                 <List>
                     <ListElement ><Link1 to="/shop"><i className="fa-solid fa-basket-shopping fa-lg"></i>Alışveriş</Link1></ListElement>
-                    <ListElement ><Link1 to="/inventory"><i className="fa-solid fa-book fa-lg"></i>Envanter</Link1></ListElement>
-                    <ListElement><Link1 to="/recipes"><i className="fa-solid fa-bread-slice"></i>Tarifler</Link1></ListElement>
-                    <ListElement><Link1 to="/stats"><i className="fa-solid fa-chart-line"></i>İstatistikler</Link1></ListElement>
-                    <ListElement><Link1 className='bottom' to="/options"><i className="fa-solid fa-gear"></i>Ayarlar</Link1></ListElement>
+                    <ListElement ><Link1 to="/inventory"><i class="fa-regular fa-snowflake fa-lg"></i>Sanal Buzdolabı</Link1></ListElement>
+                    <ListElement><Link1 to="/recipes"><i className="fa-solid fa-bread-slice fa-lg"></i>Tarifler</Link1></ListElement>
+                    <ListElement><Link1 to="/stats"><i className="fa-solid fa-chart-line fa-lg"></i>İstatistikler</Link1></ListElement>
+                    {/* <ListElement><Link1 className='bottom' to="/options"><i className="fa-solid fa-gear"></i>Ayarlar</Link1></ListElement> */}
 
                 </List>
             </div>
@@ -164,11 +164,11 @@ export default function Sidebar(props){
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <List>
-                            <ListElement ><Link1 to="/shop"><i className="fa-solid fa-basket-shopping fa-lg"></i>Alışveriş</Link1></ListElement>
-                            <ListElement ><Link1 to="/inventory"><i className="fa-solid fa-book fa-lg"></i>Envanter</Link1></ListElement>
+                            <ListElement ><Link1 to="/shop"><i className="fa-solid fa-basket-shopping"></i>Alışveriş</Link1></ListElement>
+                            <ListElement ><Link1 to="/inventory"><i class="fa-regular fa-snowflake"></i>Sanal Buzdolabı</Link1></ListElement>
                             <ListElement><Link1 to="/recipes"><i className="fa-solid fa-bread-slice"></i>Tarifler</Link1></ListElement>
                             <ListElement><Link1 to="/stats"><i className="fa-solid fa-chart-line"></i>İstatistikler</Link1></ListElement>
-                            <ListElement><Link1 className='bottom' to="/options"><i className="fa-solid fa-gear"></i>Ayarlar</Link1></ListElement>
+                            {/* <ListElement><Link1 className='bottom' to="/options"><i className="fa-solid fa-gear"></i>Ayarlar</Link1></ListElement> */}
 
                         </List>
                     </Offcanvas.Body>

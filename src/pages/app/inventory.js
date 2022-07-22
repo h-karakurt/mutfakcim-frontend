@@ -242,7 +242,6 @@ export default function Inventory() {
                 <Col className="ps-0">
                     <Navbar userName={userName} />
                     <Layout>
-                        <h4 className="text-center">Envanterdeki Ürünler</h4>
                         {inventoryTableState}
                     </Layout>
                 </Col>
