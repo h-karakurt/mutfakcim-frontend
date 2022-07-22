@@ -139,7 +139,7 @@ export default function Confirm() {
 
     axios({
       method: "POST",
-      url: "http://localhost:3051/api/users/resetconfirm",
+      url: "https://arcane-fortress-37188.herokuapp.com/api/users/resetconfirm",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

@@ -166,7 +166,7 @@ const DeleteShop = (shopid) => {
       
       axios({
       method: "DELETE",
-      url: `http://localhost:3051/api/shops/${shopid}`,
+      url: `https://arcane-fortress-37188.herokuapp.com/api/shops/${shopid}`,
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -235,7 +235,7 @@ export default function Dashboard() {
   //get username
   axios({
     method: "GET",
-    url: "http://localhost:3051/api/users/auth",
+    url: "https://arcane-fortress-37188.herokuapp.com/api/users/auth",
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",
@@ -268,7 +268,7 @@ export default function Dashboard() {
     
     await axios({
       method: "GET",
-      url: "http://localhost:3051/api/shops/getShops",
+      url: "https://arcane-fortress-37188.herokuapp.com/api/shops/getShops",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -343,7 +343,7 @@ export default function Dashboard() {
   
     return (
         <>
-          <option value={"empty"}>Please select</option>
+          <option value={"empty"}>Geçmişte alınan ürünler..</option>
           {OptionData}
         </>
     );
@@ -355,7 +355,7 @@ export default function Dashboard() {
     setLoading(true)
     axios({
       method: "POST",
-      url: "http://localhost:3051/api/shops/createShop",
+      url: "https://arcane-fortress-37188.herokuapp.com/api/shops/createShop",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -519,9 +519,9 @@ export default function Dashboard() {
                   >
                     <option>Birim</option>
                     <option value="kg">kg</option>
-                    <option value="gr">gr</option>
+                    {/* <option value="gr">gr</option> */}
                     <option value="L">L</option>
-                    <option value="mL">mL</option>
+                    {/* <option value="mL">mL</option> */}
                     <option value="Tane">Tane</option>
                   </Form.Select>
                 </Col>
@@ -580,11 +580,11 @@ export default function Dashboard() {
 
     //all details of selected option
     const [selectedOptionDetails , setSelectedOptionDetails] = useState();
-
+    
     useEffect(() => {
       axios({
         method: "GET",
-        url: "http://localhost:3051/api/shops/getShops",
+        url: "https://arcane-fortress-37188.herokuapp.com/api/shops/getShops",
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
@@ -604,8 +604,6 @@ export default function Dashboard() {
                 productUnitType: option.unit,
                 productCat: option.category,
               }
-
-              console.log(someNewValue);
               setSelectedOptionDetails(someNewValue)
             }
             
@@ -626,9 +624,7 @@ export default function Dashboard() {
           icon: "error",
           confirmButtonText: "Tamam.",
         }).then(() => {
-          
           window.location.reload();
-
         })
       });
     },[selectedInput])
@@ -653,7 +649,6 @@ export default function Dashboard() {
       }).then(function () {setSaveDisabled(false)});
     } 
     
-
     return (
       <>
         <Button className="modal-button" onClick={handleShow}>
@@ -682,7 +677,7 @@ export default function Dashboard() {
             <Button variant="dark" onClick={handleClose}>
               Kapat
             </Button>
-            <Button onClick={handleAddFormSubmit} variant="primary">
+            <Button onClick={handleAddFormSubmit} variant="primary" disabled={selectedInput === "empty" ? true : false}>
               Ürünü Ekle
             </Button>
           </Modal.Footer>

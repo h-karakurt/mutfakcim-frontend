@@ -16,7 +16,7 @@ import "../src/assets/style/custom.scss";
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-// http://localhost:3051/api
+// https://arcane-fortress-37188.herokuapp.com/api
 
 function App() {
   return (

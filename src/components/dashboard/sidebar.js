@@ -88,7 +88,7 @@ const ListElement = styled.li`
 function logOut() {
     axios({
       method: 'POST',
-      url: 'http://localhost:3051/api/users/logout',
+      url: 'https://arcane-fortress-37188.herokuapp.com/api/users/logout',
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',

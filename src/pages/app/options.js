@@ -14,7 +14,7 @@ export default function Options() {
     const [userName, setUserName] = useState('');
     axios({
         method: 'GET',
-        url: 'http://localhost:3051/api/users/auth',
+        url: 'https://arcane-fortress-37188.herokuapp.com/api/users/auth',
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',

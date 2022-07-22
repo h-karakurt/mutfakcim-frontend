@@ -86,7 +86,7 @@ export default function Recipes() {
         
         axios({
             method: "GET",
-            url: "http://localhost:3051/api/shops/recipes",
+            url: "https://arcane-fortress-37188.herokuapp.com/api/shops/recipes",
             withCredentials: true,
             headers: {
               "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export default function Recipes() {
     const [userName, setUserName] = useState('');
     axios({
         method: 'GET',
-        url: 'http://localhost:3051/api/users/auth',
+        url: 'https://arcane-fortress-37188.herokuapp.com/api/users/auth',
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',

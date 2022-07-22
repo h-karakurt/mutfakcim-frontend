@@ -148,7 +148,7 @@ export default function ForgetPassword() {
 
       axios({
         method: "POST",
-        url: "http://localhost:3051/api/users/resetpassword",
+        url: "https://arcane-fortress-37188.herokuapp.com/api/users/resetpassword",
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

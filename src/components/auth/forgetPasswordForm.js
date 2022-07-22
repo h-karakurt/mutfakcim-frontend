@@ -136,7 +136,7 @@ export default function ForgetPassword() {
     console.log(emailData);
     axios({
       method: "POST",
-      url: "http://localhost:3051/api/users/forgetpassword",
+      url: "https://arcane-fortress-37188.herokuapp.com/api/users/forgetpassword",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

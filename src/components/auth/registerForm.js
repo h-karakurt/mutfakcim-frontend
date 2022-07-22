@@ -27,11 +27,10 @@ const CenteredDiv = styled.div`
     background-color: #FCFFE7;
     padding: 15px;
     .custom-input {
-      background-color: #76b852;
       color: white;
       &:focus {
         box-shadow: 0 0 0 0.25rem #76b852aa;
-        border-color: white;
+        border-color: #76b852;;
       }
     }
   }
@@ -81,6 +80,9 @@ const CenteredDiv = styled.div`
     top: 0%;
     left: 0%;
     height: 100vh;
+    @media screen and (max-height: 600px) {
+      height: unset;
+    }
     .right-panel {
       padding: 15px;
     }
@@ -190,7 +192,7 @@ export default function Register() {
 
     axios({
       method: "POST",
-      url: "http://localhost:3051/api/users",
+      url: "https://arcane-fortress-37188.herokuapp.com/api/users",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

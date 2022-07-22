@@ -69,7 +69,10 @@ const CenteredDiv = styled.div`
     width: 100%;
     top: 0%;
     left: 0%;
-    height: 100%;
+    height: 100vh;
+    @media screen and (max-height: 600px) {
+      height: unset;
+    }
     .right-panel {
       background-color: #fcffe7;
       padding: 15px;
@@ -179,7 +182,7 @@ export default function Login(props) {
 
     axios({
       method: "POST",
-      url: "http://localhost:3051/api/users/login",
+      url: "https://arcane-fortress-37188.herokuapp.com/api/users/login",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
