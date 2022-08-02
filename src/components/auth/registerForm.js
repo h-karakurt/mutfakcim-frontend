@@ -4,7 +4,7 @@ import "../../assets/style/custom-styles.scss";
 import React, { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../../assets/images/Logo.svg";
+import Logo from "../../assets/images/Logo.png";
 
 var axios = require("axios");
 
@@ -17,20 +17,20 @@ const CenteredDiv = styled.div`
     transition: background-color 600000s 0s, color 600000s 0s;
   }
 
-  background: #76b852;
+  background: #14a484;
   box-shadow: 0px 10px 10px 5px #62727d;
   width: 50%;
   position: absolute;
   top: 25%;
   left: 25%;
   .right-panel {
-    background-color: #FCFFE7;
+    background-color: #ffffff;
     padding: 15px;
     .custom-input {
       color: white;
       &:focus {
-        box-shadow: 0 0 0 0.25rem #76b852aa;
-        border-color: #76b852;;
+        box-shadow: 0 0 0 0.25rem #14a484aa;
+        border-color: #14a484;;
       }
     }
   }
@@ -124,7 +124,7 @@ const SpinnerWrapper = styled.div`
   width: 60px;
   margin-top: 25%;
   height: 60px;
-  border: 5px solid #76b852;
+  border: 5px solid #14a484;
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;

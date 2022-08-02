@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {NavLink} from "react-router-dom";
-import Logo from '../../assets/images/Logo.svg'
+import Logo from '../../assets/images/Logo.png'
 import { Offcanvas, Button } from "react-bootstrap"
 import { useState } from "react";
 import Swal from 'sweetalert2'
@@ -10,8 +10,8 @@ var axios = require('axios');
 
 
 const SideContainer = styled.div`
-    background-color: #FCFFE7;
-    height: 100vh;
+    background-color: #ffffff;
+    height: 100%;
     img.logo{
         width: 70%;
         margin-left: auto;
@@ -71,10 +71,10 @@ const List = styled.ul`
 `
 const ListElement = styled.li`
     font-weight: bold;
-    border-bottom: 1px solid #76b8522a;
+    border-bottom: 1px solid #14a4842a;
 
     &:hover{
-        background-color: #76b852;
+        background-color: #14a484;
         transition: .2s;
     }
     transition: .2s;
@@ -138,7 +138,7 @@ export default function Sidebar(props){
                 <img className='logo' src={Logo} alt="Logo" />
                 <List>
                     <ListElement ><Link1 to="/shop"><i className="fa-solid fa-basket-shopping fa-lg"></i>Alışveriş</Link1></ListElement>
-                    <ListElement ><Link1 to="/inventory"><i class="fa-regular fa-snowflake fa-lg"></i>Sanal Buzdolabı</Link1></ListElement>
+                    <ListElement ><Link1 to="/inventory"><i className="fa-regular fa-snowflake fa-lg"></i>Sanal Buzdolabı</Link1></ListElement>
                     <ListElement><Link1 to="/recipes"><i className="fa-solid fa-bread-slice fa-lg"></i>Tarifler</Link1></ListElement>
                     <ListElement><Link1 to="/stats"><i className="fa-solid fa-chart-line fa-lg"></i>İstatistikler</Link1></ListElement>
                     {/* <ListElement><Link1 className='bottom' to="/options"><i className="fa-solid fa-gear"></i>Ayarlar</Link1></ListElement> */}
@@ -165,7 +165,7 @@ export default function Sidebar(props){
                     <Offcanvas.Body>
                         <List>
                             <ListElement ><Link1 to="/shop"><i className="fa-solid fa-basket-shopping"></i>Alışveriş</Link1></ListElement>
-                            <ListElement ><Link1 to="/inventory"><i class="fa-regular fa-snowflake"></i>Sanal Buzdolabı</Link1></ListElement>
+                            <ListElement ><Link1 to="/inventory"><i className="fa-regular fa-snowflake"></i>Sanal Buzdolabı</Link1></ListElement>
                             <ListElement><Link1 to="/recipes"><i className="fa-solid fa-bread-slice"></i>Tarifler</Link1></ListElement>
                             <ListElement><Link1 to="/stats"><i className="fa-solid fa-chart-line"></i>İstatistikler</Link1></ListElement>
                             {/* <ListElement><Link1 className='bottom' to="/options"><i className="fa-solid fa-gear"></i>Ayarlar</Link1></ListElement> */}

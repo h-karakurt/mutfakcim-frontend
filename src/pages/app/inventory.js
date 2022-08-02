@@ -25,7 +25,7 @@ const StyledCard = styled(Card)`
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    background-color: #FCFFE7;
+    background-color: #ffffff;
 
     ul{
         width: 300px;

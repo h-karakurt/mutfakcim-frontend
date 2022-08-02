@@ -16,7 +16,7 @@ const StyledCard = styled(Card)`
         }
     
         span{
-        color: #76b852;
+        color: #14a484;
         font-weight: bold;
     }
 

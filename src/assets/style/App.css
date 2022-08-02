@@ -3,8 +3,8 @@ body{
 }
 
 .form-check-input:checked {
-    background-color: #FCFFE7  !important;
-    border-color: #76B852 !important;
+    background-color: #ffffff  !important;
+    border-color: #14a484 !important;
 }
 
 .form-check-input:focus {

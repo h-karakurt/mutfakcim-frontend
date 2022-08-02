@@ -22,7 +22,7 @@ const StyledCard = styled(Card)`
     width: 100%;
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #FCFFE7;
+    background-color: #ffffff;
 
     h2{
         text-align: center;
