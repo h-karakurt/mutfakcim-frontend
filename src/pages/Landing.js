@@ -1,16 +1,16 @@
 import { Col, Row, Form, Button, Offcanvas} from "react-bootstrap"
 import styled from "styled-components";
-import Logo from "../assets/images/Logo.png"
+import Logo from "../assets/images/Logo.svg"
 import Typewriter from "typewriter-effect";
 import "../assets/style/Landing.scss"
 import { useState } from "react";
 
 var axios = require("axios");
 
-const green = '#14a484';
+const green = '#76B852';
 
 const Background = styled.div`
-    background-color: #ffffff;
+    background-color: #FCFFE7;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -135,7 +135,7 @@ const OffSwitch = styled(Form)`
 `
 
 const StyledOffcanvas = styled(Offcanvas)`
-    background-color: #ffffff;
+    background-color: #FCFFE7;
     width: 90vw;
     ul{
         list-style-type: none;
@@ -196,14 +196,13 @@ const LoginButtonHandler = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((then) => {
-        window.location.href = "/shop"
-        console.log(then);
-      }).catch((error) => {
-        window.location.href = "/auth/login"
-        console.log(error);
-
       })
+    .then(() => {
+        {window.location.href = "/shop"}
+    })
+      .catch(function () {
+        {window.location.href = "/auth/login"}
+    });
 } 
 
 export default function Landing() {

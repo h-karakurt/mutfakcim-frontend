@@ -8,7 +8,7 @@ var axios = require('axios');
 export default function NNavbar(props) {
 
   const NavbarCustom = styled(Navbar)`
-    background-color: #ffffff;
+    background-color: #FCFFE7;
     .username{
       color: black;
       margin-right: 20px;
@@ -67,7 +67,7 @@ export default function NNavbar(props) {
 
             </Nav>
             <Nav>
-              <Nav.Link className="username">Kullanıcı: <span>{props.userName}</span></Nav.Link>
+              <Nav.Link className="username">Merhaba <span>{props.userName}👋</span></Nav.Link>
               <Nav.Link onClick={logOut} className="logout"><i className="fa-solid fa-door-open"></i> Çıkış</Nav.Link>
             </Nav>
         </Container>

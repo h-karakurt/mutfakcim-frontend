@@ -4,7 +4,7 @@ import "../../assets/style/custom-styles.scss";
 import React, { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/images/Logo.png";
+import Logo from "../../assets/images/Logo.svg";
 
 var axios = require("axios");
 
@@ -14,7 +14,7 @@ const CenteredDiv = styled.div`
     transition: background-color 600000s 0s, color 600000s 0s;
   }
 
-  background: #14a484;
+  background: #76b852;
   box-shadow: 0px 10px 10px 5px #62727d;
   border-radius: 1px;
   position: absolute;
@@ -36,7 +36,7 @@ const CenteredDiv = styled.div`
   }
 
   .right-panel {
-    background-color: #ffffff;
+    background-color: #fcffe7;
     padding: 15px;
   }
   .left-panel {
@@ -74,7 +74,7 @@ const CenteredDiv = styled.div`
       height: unset;
     }
     .right-panel {
-      background-color: #ffffff;
+      background-color: #fcffe7;
       padding: 15px;
     }
     .left-panel {
@@ -82,6 +82,17 @@ const CenteredDiv = styled.div`
       padding-bottom: 5px;
     }
   }
+`;
+
+const Header = styled.h1`
+  color: black;
+  font-weight: bold;
+`;
+
+const Text = styled.p`
+  color: black;
+  font-weight: bold;
+  font-size: 1.2em;
 `;
 
 const Span = styled.span`
@@ -105,7 +116,7 @@ const SpinnerWrapper = styled.div`
     width: 60px;
     margin-top: 25%;
     height: 60px;
-    border: 5px solid #14a484;
+    border: 5px solid #76b852;
     border-radius: 50%;
     border-top-color: #fff;
     animation: spin 1s ease-in-out infinite;
@@ -206,7 +217,8 @@ export default function Login(props) {
           md={{ order: "last", span: "12" }}
           sm={{ order: "last", span: "12" }}
           xs={{ order: "last", span: "12" }}
-          className="left-panel">
+          className="left-panel"
+        >
           <Form>
             <Row>
               <Form.Group className="mb-3">
@@ -261,9 +273,17 @@ export default function Login(props) {
             </Row>
 
             <Row>
-              <Link style={myStyle} className="mt-3" to="#">
+              <Link style={myStyle} className="mt-3" to="/auth/forgetpassword">
                 Şifremi Unuttum.
               </Link>
+            </Row>
+            <Row>
+              <Span className="mt-3">
+                Hesabınız yok mu?{" "}
+                <Link style={myStyle} className="mt-3" to="/auth/register">
+                  Hesap Oluşturun
+                </Link>
+              </Span>
             </Row>
           </Form>
         </Col>
@@ -274,9 +294,12 @@ export default function Login(props) {
           md={{ order: "first", span: "12" }}
           sm={{ order: "first", span: "12" }}
           xs={{ order: "first", span: "12" }}
-          className="right-panel d-flex justify-content-center align-items-center pb-5" >
-          <div>
-            <img src={Logo} alt="Logo" width={300} />
+          className="right-panel"
+        >
+          <div className="mt-3 mt-lg-5">
+            <img src={Logo} alt="Logo" />
+            <Header>Hoşgeldiniz.</Header>
+            <Text className="mt-5">Sizi tekrar burada görmek çok güzel!</Text>
           </div>
         </Col>
       </Row>
