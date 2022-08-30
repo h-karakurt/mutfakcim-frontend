@@ -192,7 +192,7 @@ export default function Register() {
 
     axios({
       method: "POST",
-      url: "https://arcane-fortress-37188.herokuapp.com/api/users",
+      url: "http://localhost:3051/api/users",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

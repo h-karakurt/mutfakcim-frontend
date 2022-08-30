@@ -101,7 +101,7 @@ const DeleteInventory = (name) => {
         if(result.isConfirmed) {
             axios({
                 method: "POST",
-                url: "https://arcane-fortress-37188.herokuapp.com/api/shops/inventory/delete",
+                url: "http://localhost:3051/api/shops/inventory/delete",
                 withCredentials: true,
                 headers: {
                   "Content-Type": "application/json",
@@ -167,7 +167,7 @@ const ReduceInventory = (name , amount) => {
         if(result.isConfirmed) {
             axios({
                 method: "POST",
-                url: "https://arcane-fortress-37188.herokuapp.com/api/shops/inventory/update",
+                url: "http://localhost:3051/api/shops/inventory/update",
                 withCredentials: true,
                 headers: {
                   "Content-Type": "application/json",
@@ -205,7 +205,7 @@ export default function Inventory() {
     const fetchInventory = () => {
         axios({
             method: "GET",
-            url: "https://arcane-fortress-37188.herokuapp.com/api/shops/inventory",
+            url: "http://localhost:3051/api/shops/inventory",
             withCredentials: true,
             headers: {
               "Content-Type": "application/json",
@@ -223,7 +223,7 @@ export default function Inventory() {
     const [userName, setUserName] = useState('');
     axios({
         method: 'GET',
-        url: 'https://arcane-fortress-37188.herokuapp.com/api/users/auth',
+        url: 'http://localhost:3051/api/users/auth',
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',

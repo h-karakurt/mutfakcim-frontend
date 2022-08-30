@@ -166,7 +166,7 @@ const DeleteShop = (shopid) => {
       
       axios({
       method: "DELETE",
-      url: `https://arcane-fortress-37188.herokuapp.com/api/shops/${shopid}`,
+      url: `http://localhost:3051/api/shops/${shopid}`,
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -235,7 +235,7 @@ export default function Dashboard() {
   //get username
   axios({
     method: "GET",
-    url: "https://arcane-fortress-37188.herokuapp.com/api/users/auth",
+    url: "http://localhost:3051/api/users/auth",
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",
@@ -268,7 +268,7 @@ export default function Dashboard() {
     
     await axios({
       method: "GET",
-      url: "https://arcane-fortress-37188.herokuapp.com/api/shops/getShops",
+      url: "http://localhost:3051/api/shops/getShops",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -355,7 +355,7 @@ export default function Dashboard() {
     setLoading(true)
     axios({
       method: "POST",
-      url: "https://arcane-fortress-37188.herokuapp.com/api/shops/createShop",
+      url: "http://localhost:3051/api/shops/createShop",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -584,7 +584,7 @@ export default function Dashboard() {
     useEffect(() => {
       axios({
         method: "GET",
-        url: "https://arcane-fortress-37188.herokuapp.com/api/shops/getShops",
+        url: "http://localhost:3051/api/shops/getShops",
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

@@ -75,7 +75,7 @@ export default function Stats() {
     
         axios({
             method: "GET",
-            url: "https://arcane-fortress-37188.herokuapp.com/api/shops/stats",
+            url: "http://localhost:3051/api/shops/stats",
             withCredentials: true,
             headers: {
               "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function Stats() {
     const [userName, setUserName] = useState('');
     axios({
         method: 'GET',
-        url: 'https://arcane-fortress-37188.herokuapp.com/api/users/auth',
+        url: 'http://localhost:3051/api/users/auth',
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',
